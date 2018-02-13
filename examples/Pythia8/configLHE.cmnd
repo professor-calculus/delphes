@@ -1,7 +1,7 @@
 ! 1) Settings used in the main program.
 
-Main:numberOfEvents = 10         ! number of events to generate
-Main:timesAllowErrors = 3          ! how many aborts before run stops
+Main:numberOfEvents = 500000	
+Main:timesAllowErrors = 30          ! how many aborts before run stops
 
 ! 2) Settings related to output in init(), next() and stat().
 
@@ -15,4 +15,17 @@ Next:numberShowEvent = 0           ! print event record n times
 ! 3) Set the input LHE file
 
 Beams:frameType = 4
-Beams:LHEF = examples/Pythia8/events.lhe    
+Beams:LHEF = /storage/at1062/unweighted_events.lhe
+
+! jet matching
+JetMatching:setMad = off
+JetMatching:scheme = 1
+JetMatching:merge = on
+JetMatching:jetAlgorithm = 2
+JetMatching:etaJetMax = 5.
+JetMatching:coneRadius = 1.
+JetMatching:slowJetPower = 1
+JetMatching:qCut = 80.
+JetMatching:nQmatch = 5
+JetMatching:nJetMax = 1
+JetMatching:doShowerKt = off

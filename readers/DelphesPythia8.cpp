@@ -35,6 +35,7 @@
 #include "TDatabasePDG.h"
 #include "TParticlePDG.h"
 #include "TLorentzVector.h"
+#include "TVectorD.h"
 
 #include "modules/Delphes.h"
 #include "classes/DelphesClasses.h"
@@ -406,6 +407,17 @@ int main(int argc, char *argv[])
     treeWriter->Write();
 
     cout << "** Exiting..." << endl;
+
+    //Here's where I put the cross-section as an output to bash (for piping) and also to the .root file
+    cout << "Cross section (pb):   " << pythia->info.sigmaGen()*1000000000. << endl;
+
+    TVectorD tvectord(1);
+    tvectord[0] = pythia->info.sigmaGen()*1000000000.;
+    tvectord.Write("crosssection");
+
+    TVectorD tvectord2(1);
+    tvectord2[0] = pythia->info.sigmaErr()*1000000000.;
+    tvectord2.Write("crosssection_error");
 
     delete reader;
     delete pythia;
